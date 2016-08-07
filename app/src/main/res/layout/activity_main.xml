@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  >
+
+  <fragment
+    android:id="@+id/search_input_fragment"
+    android:name="com.ogaclejapan.flux.components.fragment.SearchInputFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    />
+
+  <fragment
+    android:id="@+id/search_result_fragment"
+    android:name="com.ogaclejapan.flux.components.fragment.SearchResultFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+</LinearLayout>

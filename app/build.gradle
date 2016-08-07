@@ -1,0 +1,120 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+  compileSdkVersion 24
+  buildToolsVersion "24.0.0"
+
+  defaultConfig {
+    applicationId "com.ogaclejapan.flux"
+    minSdkVersion 16
+    targetSdkVersion 24
+    versionCode 1
+    versionName "1.0"
+
+    buildConfigField("boolean", "ENABLE_LEAKCANARY", "false")
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  packagingOptions {
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
+
+  dataBinding {
+    enabled = true
+  }
+}
+
+dependencies {
+
+  // Android support libraries
+  compile "com.android.support:support-v4:24.1.1"
+  compile "com.android.support:appcompat-v7:24.1.1"
+  compile "com.android.support:design:24.1.1"
+  compile "com.android.support:recyclerview-v7:24.1.1"
+  testCompile "com.android.support:support-annotations:24.1.1"
+
+  // Backport of Java 8's lambda expressions
+  retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
+
+  // Backport of Java 8's stream api
+  compile 'com.annimon:stream:1.0.9'
+
+  // Backport of JSR-310
+  compile 'com.jakewharton.threetenabp:threetenabp:1.0.3'
+
+  // Compile-time dependency injection
+  compile "com.google.dagger:dagger:2.5"
+  apt "com.google.dagger:dagger-compiler:2.5"
+  testApt "com.google.dagger:dagger-compiler:2.5"
+  provided 'org.glassfish:javax.annotation:10.0-b28'
+  apt 'com.google.guava:guava:19.0' // https://github.com/google/dagger/issues/356
+
+  // Reactive Extensions
+  compile 'io.reactivex:rxjava:1.1.5'
+  compile 'io.reactivex:rxandroid:1.2.0'
+
+  // JSON serialization/deserialization
+  compile 'com.google.code.gson:gson:2.6.2'
+
+  // HTTP client
+  compile "com.squareup.okhttp3:okhttp:3.4.1"
+  compile "com.squareup.okhttp3:okhttp-urlconnection:3.4.1"
+  compile "com.squareup.okhttp3:logging-interceptor:3.4.1"
+  testCompile "com.squareup.okhttp3:mockwebserver:3.4.1"
+
+  // REST client
+  compile "com.squareup.retrofit2:retrofit:2.1.0"
+  compile "com.squareup.retrofit2:converter-gson:2.1.0"
+  compile "com.squareup.retrofit2:adapter-rxjava:2.1.0"
+
+  // Image loading and caching
+  compile 'com.github.bumptech.glide:glide:3.7.0'
+  compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+  compile 'jp.wasabeef:glide-transformations:2.0.1'
+
+  // Logger
+  compile "com.jakewharton.timber:timber:4.1.2"
+
+  // EventBus
+  compile 'org.greenrobot:eventbus:3.0.0'
+  apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+
+  // Infinite scroll
+  compile 'com.vinaysshenoy:mugen:1.0.3'
+
+  //---------- Debugging-only dependencies ----------//
+
+  // Memory leak detection
+  debugCompile "com.squareup.leakcanary:leakcanary-android:1.4-beta2"
+  releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2"
+  testCompile "com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2"
+
+  // Debug bridge for Chrome developer tools
+  debugCompile "com.facebook.stetho:stetho:1.3.1"
+  debugCompile "com.facebook.stetho:stetho-okhttp3:1.3.1"
+  debugCompile "com.facebook.stetho:stetho-timber:1.3.1@aar"
+  debugCompile "com.google.code.findbugs:jsr305:3.0.1"
+}
+
+apt {
+  arguments {
+    eventBusIndex "org.greenrobot.eventbusperf.AppEventBusIndex"
+  }
+}
