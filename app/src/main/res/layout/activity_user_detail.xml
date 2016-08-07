@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:bind="http://schemas.android.com/apk/res-auto"
+  >
+
+  <data>
+    <variable
+      name="userName"
+      type="String"
+      />
+    <variable
+      name="userThumbnail"
+      type="String"
+      />
+  </data>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      >
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@{userName}"
+        />
+
+      <ImageView
+        android:id="@+id/image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        bind:image_crop_circle="@{userThumbnail}"
+        />
+
+    </LinearLayout>
+
+  </FrameLayout>
+
+</layout>

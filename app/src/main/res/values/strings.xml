@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">FluxArchitectureSample</string>
+  <string name="search">Search</string>
+  <string name="search_text_hint">Input account id</string>
+  <string name="dialog">Dialog</string>
+  <string name="empty">No result</string>
+</resources>
